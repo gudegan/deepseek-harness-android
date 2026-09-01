@@ -20,8 +20,8 @@ android {
         applicationId = "com.deepseek.dshshell"
         minSdk = 26
         targetSdk = 34
-        versionCode = 42
-        versionName = "0.5.27"
+        versionCode = 43
+        versionName = "0.5.28"
     }
 
     // 把 proot 作为原生库打进 APK：安装时由系统解压到 nativeLibraryDir，
