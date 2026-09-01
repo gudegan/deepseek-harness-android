@@ -1,0 +1,20 @@
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build
+/app/build
+/captures
+.externalNativeBuild
+.cxx
+# 100M 级 runtime 资产由 Gradle 任务从 runtime-builder/dist 同步生成，不入库
+/app/src/main/assets/runtime/
+# runtime-builder 构建产物（含 100M+ runtime.tar.xz 与 proot），跨平台分发用 GitHub Release
+/runtime-builder/dist/
+/runtime-builder/work/
+# 本地依赖与前端探索构建残留，不入库
+/_deps/
+/_frontend2/
+# 自用签名 keystore 与口令，切勿入库
+/keystore/

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 预览 WebView 常驻于 Activity 的 preview_holder（切 tab 不重载），
+     本页仅作为占位，视图内容由代码控制 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

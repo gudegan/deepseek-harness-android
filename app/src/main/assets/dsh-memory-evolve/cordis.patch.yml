@@ -1,0 +1,4 @@
+﻿# dsh-memory-evolve bundle patch（预装补充：原包缺此文件，加一行从 bundle 加载）
+- insert:
+    - id: dsh-memory-evolve
+      name: dsh-memory-evolve

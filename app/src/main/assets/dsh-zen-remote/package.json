@@ -1,0 +1,128 @@
+{
+  "name": "dsh-zen-remote",
+  "version": "1.1.10",
+  "description": "把 DeepSeek Harness 变成手机 App：移动端界面重排（两级页面栈、会话列表主屏、composer 重排、手势、附件上传）+ 配对码认证网关 + PWA 安装 + 真 Web Push。Complete mobile plugin for DeepSeek Harness (DSH): app-shell mobile UI, pairing-code gateway for public-internet access behind your own reverse proxy, installable PWA, offline service worker, and real Web Push agent-done notifications.",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./lan-gate.mjs": "./lan-gate.mjs",
+    "./dsh-push.mjs": "./dsh-push.mjs",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lan-gate.mjs",
+    "dsh-push.mjs",
+    "lib",
+    "pwa",
+    "src",
+    "scripts",
+    "assets",
+    "docs",
+    "cordis.patch.yml",
+    "cordis.patch.yml.example",
+    "llms.txt",
+    "AGENTS.md",
+    "README.md",
+    "LICENSE",
+    "!docs/push-policy.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ]
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "dsh-plugin-add",
+    "deepseek-harness",
+    "deepseek-harness-plugin",
+    "mobile",
+    "mobile-ui",
+    "phone",
+    "pwa",
+    "progressive-web-app",
+    "remote-access",
+    "pairing",
+    "public",
+    "reverse-proxy",
+    "gateway",
+    "service-worker",
+    "web-push",
+    "offline",
+    "ai-agent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KyoMio/dsh-zen-remote.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "web-push": "^3.6.7"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-client-locale": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-client-runtime": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-client-ui-conversation": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-client-ui-layout": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-client-ui-primitives": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-client-ui-sidebar": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-client-ui-slots": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-host-webserver": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-session": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "@deepseek-ai/dsh-session-log-export": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.0 <0.2.0-0",
+    "react": "^18.2.0",
+    "@deepseek-ai/dsh-tools": ">=0.0.1-rc.1 <0.1.0 || >=0.1.0-rc.1 <0.2.0-0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-host-webserver": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-api-remotes": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-connection": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-host-apiproxy": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-host-webserver": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-session": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-session-stats": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-token-meter": "0.1.1-rc.2",
+    "@types/node": "^26.2.0",
+    "@types/react": "~18.3.1",
+    "@types/react-dom": "~18.3.0",
+    "typescript": "^6.0.3",
+    "@deepseek-ai/dsh-tools": "0.1.1-rc.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.client.json && node scripts/build-client.mjs",
+    "verify": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json --noEmit",
+    "test": "node --test \"test/*.test.cjs\" && node scripts/check-sunk-viewport.mjs && node scripts/check-keyboard-avoid.mjs && node scripts/check-attach-upload.mjs && node scripts/check-upload-endpoint.mjs && node scripts/sync-doc-version.mjs --check",
+    "version": "node scripts/sync-doc-version.mjs && git add README.md"
+  }
+}

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DeepSeek Harness</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_dashboard">控制台</string>
+    <string name="nav_preview">预览</string>
+    <string name="nav_files">文件</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 控制台 -->
+    <string name="dash_status_sandbox">沙盒</string>
+    <string name="dash_status_dsh">dsh</string>
+    <string name="dash_btn_extract">启动沙盒</string>
+    <string name="dash_btn_start">启动 dsh</string>
+    <string name="dash_btn_restart">重启 dsh</string>
+    <string name="dash_btn_stop">关闭 dsh</string>
+    <string name="dash_btn_close">关闭沙盒（停止服务）</string>
+    <string name="dash_btn_log">查看日志</string>
+    <string name="dash_hint">应用已自动进入“解压 → 启动 dsh”流程，可在下方手动开关。</string>
+    <string name="dash_version_fmt">v%1$s</string>
+    <string name="dash_intro_title">DeepSeek Harness 手机版</string>
+    <string name="dash_intro_desc">在 Android 手机上免 ROOT、免 Termux 直接运行 DeepSeek Harness（dsh）——DeepSeek 官方的 Agent 运行时。应用内置 Debian 沙盒与 Node.js，安装即用，网络、文件、一键更新全部开箱支持。</string>
+    <string name="dash_intro_feature_title">主要功能</string>
+    <string name="dash_intro_features">• 内置沙盒：基于 PRoot 模拟 Linux 环境，无需 ROOT 权限\n• 一键运行：首次打开自动解压并启动 dsh web\n• 预览控制台：内置 WebView 直接使用 dsh 对话界面\n• 文件管理：浏览 / 导入 / 导出 / 删除沙盒文件，支持多选\n• 在线更新：沙盒内 npm 一键升级 dsh，断网自动切国内镜像</string>
+    <string name="dash_intro_usage_title">快速上手</string>
+    <string name="dash_intro_usage">1. 打开 App，等待自动完成「解压沙盒 → 启动 dsh」\n2. 状态卡显示 dsh「运行中」后，进入底部「预览」页\n3. 在预览页 Web 界面中填写 API Key，开始对话\n4. 需要自定义文件时，到「文件」页导入导出即可</string>
+
+    <string name="sandbox_unextracted">未解压</string>
+    <string name="sandbox_extracting">解压中…</string>
+    <string name="sandbox_ready">已就绪</string>
+    <string name="dsh_stopped">已停止</string>
+    <string name="dsh_starting">启动中…</string>
+    <string name="dsh_running">运行中</string>
+    <string name="dsh_error">异常</string>
+
+    <!-- 预览页 -->
+    <string name="preview_placeholder_title">dsh 尚未运行</string>
+    <string name="preview_placeholder_hint">请返回控制台“启动 dsh”，就绪后本页自动加载。</string>
+    <string name="preview_url">http://127.0.0.1:3080</string>
+    <string name="preview_refresh">刷新</string>
+    <string name="preview_back">返回</string>
+
+    <!-- 文件页 -->
+    <string name="files_import">导入</string>
+    <string name="files_up">返回上级</string>
+    <string name="files_export">导出</string>
+    <string name="files_open_preview">预览内容</string>
+    <string name="files_delete">删除</string>
+    <string name="files_export_selected">批量导出</string>
+    <string name="files_cancel_selection">取消</string>
+    <string name="files_selected_count">已选 %1$d 项</string>
+    <string name="files_delete_title">删除确认</string>
+    <string name="files_delete_confirm">确定删除选中的 %1$d 项吗？此操作不可恢复。</string>
+    <string name="files_delete_ok">已删除 %1$d 项</string>
+    <string name="files_export_none">所选内容没有可导出的文件</string>
+    <string name="files_export_fail_dir">无法访问所选目录</string>
+    <string name="files_export_ok_batch">已导出 %1$d/%2$d 个文件%3$s</string>
+    <string name="files_export_skip_dir">（跳过 %1$d 个目录）</string>
+    <string name="files_path_hint">沙盒路径</string>
+    <string name="files_dir_meta">%1$d 项</string>
+    <string name="files_file_meta">%1$s · %2$s</string>
+    <string name="files_dir_missing">目录不存在</string>
+    <string name="files_preview_too_large">文件过大，无法预览</string>
+    <string name="files_preview_binary">非文本文件，无法预览</string>
+    <string name="files_import_ok">已导入 %1$s</string>
+    <string name="files_import_fail">导入失败：%1$s</string>
+    <string name="files_export_ok">已导出 %1$s</string>
+    <string name="files_export_fail">导出失败：%1$s</string>
+
+    <!-- 设置页 -->
+    <string name="settings_title">设置</string>
+    <string name="settings_api_key">API Key</string>
+    <string name="settings_api_key_hint">在预览页 Web UI 里填写，保存于 $DSH_HOME/.credentials.yaml</string>
+    <string name="settings_mount_sdcard">挂载 /sdcard</string>
+    <string name="settings_mount_sdcard_hint">是否 -b /sdcard:/mnt/sdcard，改动后重启 dsh 生效</string>
+    <string name="settings_auto_start">自动启动</string>
+    <string name="settings_auto_start_hint">打开应用自动“解压 → 启动 dsh”</string>
+    <string name="settings_mode">运行模式</string>
+    <string name="settings_mode_standard">标准</string>
+    <string name="settings_mode_minimal">极简</string>
+    <string name="settings_battery">加入电池优化白名单</string>
+    <string name="settings_battery_done">已在白名单</string>
+    <string name="settings_battery_manual">请到系统设置手动允许后台运行</string>
+    <string name="settings_log">查看 / 导出日志</string>
+    <string name="settings_log_view">查看日志</string>
+    <string name="settings_log_export">导出日志</string>
+    <string name="settings_log_exported">日志已导出</string>
+    <string name="settings_clear">清除沙盒数据</string>
+    <string name="settings_clear_confirm">将删除已解压的沙盒与 dsh 配置，下次启动重新解压。确认？</string>
+    <string name="settings_clear_done">已清除，下次启动重新解压</string>
+    <string name="settings_reset_dsh">DSH 恢复默认设置</string>
+    <string name="settings_reset_action">恢复</string>
+    <string name="settings_reset_dsh_confirm">会把 dsh 恢复为出厂默认：移除你自装/自研的插件与用户配置层（回到仅内置官方插件），从而修复因插件损坏导致的无法启动。\n\n保留内容：API Key、对话内容、以及产出的文件夹与文件。\n\n确认恢复默认设置？</string>
+    <string name="settings_reset_dsh_running">恢复默认设置会停止当前 dsh，完成后需重新启动 dsh。</string>
+    <string name="settings_reset_dsh_done">已将 dsh 配置恢复为默认，请重新启动 dsh 生效。</string>
+    <string name="settings_reset_dsh_fail">恢复默认设置失败：%1$s</string>
+    <string name="settings_version">版本信息</string>
+    <string name="settings_changelog">优化公告（更新日志）</string>
+    <string name="settings_version_fmt">APK %1$s\nruntime %2$s</string>
+    <string name="settings_version_na">未打包</string>
+    <string name="settings_api_key_configured">已配置（.credentials.yaml 存在）</string>
+
+    <!-- 前台服务通知 -->
+    <string name="notif_channel_name">Harness 服务</string>
+    <string name="notif_running">dsh 运行中</string>
+    <string name="notif_starting">dsh 启动中…</string>
+    <string name="notif_stopped">dsh 已停止</string>
+    <string name="notif_error">dsh 异常</string>
+
+    <!-- 日志 -->
+    <string name="log_empty">暂无日志</string>
+    <string name="log_close">关闭</string>
+    <string name="log_copy">复制日志</string>
+    <string name="log_share_feishu">分享到飞书</string>
+    <string name="log_copied">日志已复制，可粘贴发送</string>
+
+    <!-- 启动动画 -->
+    <string name="splash_subtitle">本地沙盒 · 开箱即用</string>
+
+    <!-- 设置：状态与占用 -->
+    <string name="settings_status">运行状态</string>
+    <string name="settings_status_sandbox">沙盒状态</string>
+    <string name="settings_status_dsh">dsh 状态</string>
+    <string name="settings_status_dsh_ver">dsh 版本</string>
+    <string name="settings_storage">占用空间</string>
+    <string name="settings_storage_na">计算中…</string>
+
+    <!-- 设置：外观主题 -->
+    <string name="settings_theme">外观主题</string>
+    <string name="settings_theme_mode">主题模式</string>
+    <string name="settings_theme_system">跟随系统</string>
+    <string name="settings_theme_light">浅色</string>
+    <string name="settings_theme_dark">深色</string>
+    <string name="settings_accent">强调色</string>
+    <string name="settings_accent_hint">主题切换即时生效；自定义主题将在后续版本开放</string>
+    <string name="accent_brand">DeepSeek 蓝</string>
+    <string name="accent_ocean">海洋青</string>
+    <string name="accent_violet">星云紫</string>
+    <string name="accent_deep">深海蓝</string>
+
+    <!-- 设置：更新检测 -->
+    <string name="settings_update">更新检测</string>
+    <string name="settings_update_check">检查更新</string>
+    <string name="settings_update_checking">正在检查更新…</string>
+    <string name="settings_update_current">内置 dsh 版本：%1$s</string>
+    <string name="settings_update_latest">已是最新版本（%1$s）</string>
+    <string name="settings_update_found">发现新版本 %1$s（当前 %2$s）</string>
+    <string name="settings_update_error">检查失败：%1$s</string>
+    <string name="settings_update_source">更新源：%1$s</string>
+    <string name="settings_update_open_npm">打开项目页</string>
+    <string name="settings_update_now">一键更新</string>
+    <string name="settings_update_started">已开始更新（停 dsh → npm 更新 → 重启），请稍候…</string>
+    <string name="settings_update_updating">更新中…</string>
+    <string name="settings_update_hint">内置 dsh 版本可通过沙盒内 npm 一键更新（官方源不可达自动切国内镜像）；或安装携带新 runtime 的最新 APK。</string>
+</resources>

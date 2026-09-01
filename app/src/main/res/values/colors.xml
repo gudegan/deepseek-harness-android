@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DeepSeek 品牌蓝 -->
+    <color name="brand">#4D6BFE</color>
+    <color name="brand_dark">#1E1B4B</color>
+
+    <!-- 强调色预设 -->
+    <color name="ocean">#0EA5A0</color>
+    <color name="ocean_dark">#0B3B38</color>
+    <color name="violet">#7C5CFF</color>
+    <color name="violet_dark">#3B2A7A</color>
+    <color name="deep">#2563EB</color>
+    <color name="deep_dark">#172554</color>
+
+    <!-- 启动动画 -->
+    <color name="splash_bg_start">#0B0B1E</color>
+    <color name="splash_bg_end">#1E1B4B</color>
+    <color name="splash_glow">#4D6BFE</color>
+
+    <!-- 亮色 -->
+    <color name="surface">#F7F7F8</color>
+    <color name="surface_muted">#EFEFF2</color>
+    <color name="text_primary">#171717</color>
+    <color name="text_secondary">#52525B</color>
+    <color name="success">#1DC981</color>
+    <color name="warning">#EFAA17</color>
+    <color name="danger">#E8463A</color>
+    <color name="white">#FFFFFF</color>
+</resources>

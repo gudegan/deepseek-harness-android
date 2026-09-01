@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式配色覆盖 -->
+    <color name="surface">#16161B</color>
+    <color name="surface_muted">#202029</color>
+    <color name="text_primary">#F5F5F7</color>
+    <color name="text_secondary">#A1A1AA</color>
+    <color name="success">#2EDFA0</color>
+    <color name="warning">#F5B941</color>
+    <color name="danger">#FF6B5E</color>
+</resources>

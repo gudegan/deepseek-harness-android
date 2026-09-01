@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式：背景切深色（强调色仍由主 theme 提供） -->
+    <style name="Theme.DshShell" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/brand_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/surface</item>
+    </style>
+
+    <style name="Theme.DshShell.Ocean" parent="Theme.DshShell">
+        <item name="colorPrimary">@color/ocean</item>
+        <item name="colorSecondary">@color/ocean_dark</item>
+    </style>
+
+    <style name="Theme.DshShell.Violet" parent="Theme.DshShell">
+        <item name="colorPrimary">@color/violet</item>
+        <item name="colorSecondary">@color/violet_dark</item>
+    </style>
+
+    <style name="Theme.DshShell.Deep" parent="Theme.DshShell">
+        <item name="colorPrimary">@color/deep</item>
+        <item name="colorSecondary">@color/deep_dark</item>
+    </style>
+</resources>

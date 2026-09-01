@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- nav host 区域（预览 WebView 常驻于此容器，切 tab 不销毁不重载） -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
+
+        <!-- 预览 WebView 常驻容器：始终保留在视图树中，仅切换可见性，
+             从而避免 WebView 脱离窗口导致的页面重载 -->
+        <FrameLayout
+            android:id="@+id/preview_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <FrameLayout
+                android:id="@+id/webview_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/preview_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preview_placeholder_title"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/preview_placeholder_hint"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+            </LinearLayout>
+
+            <!-- 预览页刷新快捷键：纯图标按钮（点击带动画），默认右下角，可拖动移动（位置持久化） -->
+            <ImageButton
+                android:id="@+id/btn_preview_refresh"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="12dp"
+                android:background="@drawable/bg_refresh_circle"
+                android:contentDescription="@string/preview_refresh"
+                android:src="@drawable/ic_refresh" />
+
+            <!-- 预览页返回快捷键：纯图标按钮，默认左下角，可拖动移动（位置持久化） -->
+            <ImageButton
+                android:id="@+id/btn_preview_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="start|bottom"
+                android:layout_margin="12dp"
+                android:background="@drawable/bg_refresh_circle"
+                android:contentDescription="@string/preview_back"
+                android:src="@drawable/ic_back" />
+        </FrameLayout>
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav" />
+</LinearLayout>
