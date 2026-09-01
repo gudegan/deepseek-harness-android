@@ -22,6 +22,14 @@ object Changelog {
 
     private val entries = listOf(
         Entry(
+            versionCode = 45,
+            versionName = "v0.5.30",
+            notes = listOf(
+                "设置页新增「检查 App 新版本」手动入口：随时手动检测开源 GitHub 上的新版 APK，有更新可一键下载安装",
+                "设置页新增「开源项目主页」入口，直达 GitHub 仓库",
+            ),
+        ),
+        Entry(
             versionCode = 44,
             versionName = "v0.5.29",
             notes = listOf(

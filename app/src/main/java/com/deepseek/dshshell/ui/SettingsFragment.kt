@@ -26,6 +26,7 @@ import com.deepseek.dshshell.util.Logs
 import com.deepseek.dshshell.util.Prefs
 import com.deepseek.dshshell.util.ThemeUtil
 import com.deepseek.dshshell.util.UpdateChecker
+import com.deepseek.dshshell.util.AppUpdateFlow
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,6 +89,15 @@ class SettingsFragment : Fragment() {
             UpdateChecker.embeddedDshVersion(runtime.builtinVersion) ?: getString(R.string.settings_version_na),
         )
         binding.btnCheckUpdate.setOnClickListener { checkUpdate() }
+
+        // 手动检查 App 新版本（App 自更新）
+        binding.btnCheckAppUpdate.setOnClickListener {
+            AppUpdateFlow.checkManual(requireContext(), viewLifecycleOwner.lifecycleScope)
+        }
+        // 开源项目主页
+        binding.btnOpenSource.setOnClickListener {
+            openUrl("https://github.com/gudegan/deepseek-harness-android")
+        }
 
         // 主题模式
         setupThemeControls()

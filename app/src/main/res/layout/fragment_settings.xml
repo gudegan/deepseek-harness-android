@@ -310,6 +310,24 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/settings_update_hint"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall" />
+
+                <!-- 手动检查 App 新版本（App 自更新） -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_check_app_update"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/settings_check_app_update" />
+
+                <!-- 开源项目主页 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_open_source"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/settings_open_source" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

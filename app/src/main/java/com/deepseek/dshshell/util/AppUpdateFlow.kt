@@ -47,6 +47,32 @@ object AppUpdateFlow {
         }
     }
 
+    /** 设置页手动「检查 App 更新」：无论结果都给出明确反馈（有更新→可选下载；已最新/失败→提示）。 */
+    fun checkManual(context: Context, scope: kotlinx.coroutines.CoroutineScope) {
+        val current = BuildConfig.VERSION_NAME
+        scope.launch {
+            val result = AppUpdater.check()
+            val info = result.info
+            if (info == null) {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.app_update_title)
+                    .setMessage(context.getString(R.string.app_update_check_fail, result.error ?: "未知错误"))
+                    .setPositiveButton(R.string.log_close, null)
+                    .show()
+                return@launch
+            }
+            if (AppUpdater.isNewer(info.versionName, current)) {
+                prompt(context, info)
+            } else {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.app_update_title)
+                    .setMessage(context.getString(R.string.app_update_latest, info.versionName))
+                    .setPositiveButton(R.string.log_close, null)
+                    .show()
+            }
+        }
+    }
+
     /** 弹可选更新对话框：立即更新 / 稍后。 */
     private fun prompt(context: Context, info: AppUpdater.UpdateInfo) {
         MaterialAlertDialogBuilder(context)
