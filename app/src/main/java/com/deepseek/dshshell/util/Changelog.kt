@@ -22,6 +22,21 @@ object Changelog {
 
     private val entries = listOf(
         Entry(
+            versionCode = 40,
+            versionName = "v0.5.25",
+            notes = listOf(
+                "新增 App 自更新：启动自动检测 GitHub 新版 APK（无需代理，GitHub/ghproxy/jsDelivr 多源回退），下载带进度条，可选安装（非强制）；设置页新增「启动时自动检查 App 更新」开关（默认开，可关闭）",
+            ),
+        ),
+        Entry(
+            versionCode = 39,
+            versionName = "v0.5.24",
+            notes = listOf(
+                "修复预览页刷新/返回按钮首次启动左上角重叠：按钮初始位置改为各自默认角（刷新右下/返回左下），并把定位改为布局完成后精确摆放，避免被钳到左上角",
+                "修复 v0.5.23 点击预览页闪退：回退会在布局回调中改 layoutParams 的定位方式，改为 btn.post，避免崩溃",
+            ),
+        ),
+        Entry(
             versionCode = 37,
             versionName = "v0.5.22",
             notes = listOf(
