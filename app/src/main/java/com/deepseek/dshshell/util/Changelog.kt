@@ -22,6 +22,13 @@ object Changelog {
 
     private val entries = listOf(
         Entry(
+            versionCode = 43,
+            versionName = "v0.5.28",
+            notes = listOf(
+                "启动公告（Changelog）补齐 v0.5.24~v0.5.27 记录，正确展示到最新版",
+            ),
+        ),
+        Entry(
             versionCode = 42,
             versionName = "v0.5.27",
             notes = listOf(
@@ -347,7 +354,10 @@ object Changelog {
         val seen = Prefs.getInt(KEY_LAST_SEEN, 0)
         if (current <= seen) return
         Prefs.setInt(KEY_LAST_SEEN, current)
-        showDialog(context, entries)
+        // 若 entries 未记录到当前版本（防止公告停留在旧版本），自动合成一条当前版本记录兜底
+        val list = if (entries.any { it.versionCode == current }) entries
+        else listOf(Entry(current, "v${BuildConfig.VERSION_NAME}", listOf("当前已更新到这一版本（含本版所有修复与新增）"))) + entries
+        showDialog(context, list)
     }
 
     /** 设置页手动查看完整更新历史 */
