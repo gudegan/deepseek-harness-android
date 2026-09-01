@@ -358,6 +358,22 @@
             android:text="@string/settings_auto_start_hint"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall" />
 
+        <!-- App 自更新检测 -->
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/sw_auto_check_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:text="@string/settings_auto_check_update" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingBottom="12dp"
+            android:text="@string/settings_auto_check_update_hint"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall" />
+
         <!-- 挂载 /sdcard -->
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/sw_mount_sdcard"

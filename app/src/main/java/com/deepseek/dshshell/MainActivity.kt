@@ -17,11 +17,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.lifecycle.lifecycleScope
 import com.deepseek.dshshell.databinding.ActivityMainBinding
 import com.deepseek.dshshell.service.HarnessService
+import com.deepseek.dshshell.util.AppUpdateFlow
 import com.deepseek.dshshell.util.Changelog
 import com.deepseek.dshshell.util.Prefs
 import com.deepseek.dshshell.util.ThemeUtil
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -119,6 +122,12 @@ class MainActivity : AppCompatActivity() {
 
         // 新版本安装后首次打开，弹出优化公告
         Changelog.maybeShowUpdateDialog(this)
+
+        // App 自更新：启动后延迟检测 GitHub 新版 APK（设置开关开启才检测，非强制）
+        lifecycleScope.launch {
+            kotlinx.coroutines.delay(2500)
+            AppUpdateFlow.checkAndPrompt(this@MainActivity, lifecycleScope)
+        }
     }
 
     override fun onDestroy() {

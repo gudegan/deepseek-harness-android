@@ -99,6 +99,10 @@ class SettingsFragment : Fragment() {
         binding.swAutoStart.isChecked = Prefs.autoStart
         binding.swAutoStart.setOnCheckedChangeListener { _, v -> Prefs.autoStart = v }
 
+        // App 自更新：启动自动检测开关
+        binding.swAutoCheckUpdate.isChecked = Prefs.autoCheckUpdate
+        binding.swAutoCheckUpdate.setOnCheckedChangeListener { _, v -> Prefs.autoCheckUpdate = v }
+
         // 挂载 /sdcard
         binding.swMountSdcard.isChecked = Prefs.mountSdcard
         binding.swMountSdcard.setOnCheckedChangeListener { _, v -> Prefs.mountSdcard = v }

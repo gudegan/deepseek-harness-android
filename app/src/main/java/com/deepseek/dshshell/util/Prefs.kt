@@ -19,6 +19,11 @@ object Prefs {
         get() = sp?.getBoolean("auto_start", true) ?: true
         set(v) { sp?.edit()?.putBoolean("auto_start", v)?.apply() }
 
+    /** 启动时是否自动检测 App 新版本（默认开；关掉则只在设置页手动检查时检测） */
+    var autoCheckUpdate: Boolean
+        get() = sp?.getBoolean("auto_check_update", true) ?: true
+        set(v) { sp?.edit()?.putBoolean("auto_check_update", v)?.apply() }
+
     /** 是否 -b /sdcard:/mnt/sdcard（改动后重启 dsh 生效） */
     var mountSdcard: Boolean
         get() = sp?.getBoolean("mount_sdcard", false) ?: false
