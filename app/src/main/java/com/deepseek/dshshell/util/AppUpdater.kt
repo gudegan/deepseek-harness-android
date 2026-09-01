@@ -35,10 +35,10 @@ object AppUpdater {
         val error: String?,
     )
 
-    /** 版本检测源：GitHub API → jsDelivr（读仓库 version.json） */
+    /** 版本检测源：jsDelivr（国内手机相对可达）优先 → GitHub API（实测最准）。任一成功即用。 */
     private val CHECK_SOURCES = listOf(
-        "https://api.github.com/repos/$REPO/releases/latest" to "GitHub",
         "https://cdn.jsdelivr.net/gh/$REPO@main/version.json" to "jsDelivr",
+        "https://api.github.com/repos/$REPO/releases/latest" to "GitHub",
     )
 
     /** APK 下载镜像前缀（依次尝试），空串表示 GitHub 直链 */
@@ -68,60 +68,82 @@ object AppUpdater {
     }
 
     /**
-     * 检测最新 APK 版本。依次尝试各源，成功返回 [CheckResult.info]；全部失败返回 error。
+     * 检测最新 APK 版本。遍历所有源，收集每个源成功返回的版本，取「版本号最大」的作为最新，
+     * 以规避单源缓存滞后（如 jsDelivr 先同步到旧版）或某源不可达。全部失败才返回 error。
      */
     suspend fun check(timeoutMs: Int = 8000): CheckResult = withContext(Dispatchers.IO) {
+        var best: UpdateInfo? = null
+        var lastError: String? = null
         for ((url, name) in CHECK_SOURCES) {
             try {
                 val body = httpGet(url, timeoutMs) ?: continue
-                when (name) {
-                    "GitHub" -> {
-                        val json = JSONObject(body)
-                        // release 的 assets 里找 .apk
-                        val assets = json.optJSONArray("assets") ?: continue
-                        var apkUrl: String? = null
-                        for (i in 0 until assets.length()) {
-                            val a = assets.optJSONObject(i) ?: continue
-                            if (a.optString("name").endsWith(".apk", true)) {
-                                apkUrl = a.optString("browser_download_url").ifEmpty { null }
-                                break
-                            }
-                        }
-                        val tag = stripV(json.optString("tag_name"))
-                        if (tag.isEmpty()) continue
-                        val info = UpdateInfo(
-                            versionName = tag,
-                            versionCode = -1, // GitHub 源拿不到 versionCode，用 versionName 比较
-                            apkUrl = apkUrl ?: json.optString("html_url"),
-                            releaseUrl = json.optString("html_url").ifEmpty {
-                                "https://github.com/$REPO/releases"
-                            },
-                            source = name,
-                        )
-                        return@withContext CheckResult(info, null)
-                    }
-                    "jsDelivr" -> {
-                        val json = JSONObject(body)
-                        val vn = json.optString("versionName")
-                        val apk = json.optString("releaseUrl")
-                        if (vn.isEmpty()) continue
-                        val info = UpdateInfo(
-                            versionName = vn,
-                            versionCode = json.optInt("versionCode", -1),
-                            apkUrl = apk.ifEmpty { json.optString("releaseUrl") },
-                            releaseUrl = json.optString("releaseUrl").ifEmpty {
-                                "https://github.com/$REPO/releases"
-                            },
-                            source = name,
-                        )
-                        return@withContext CheckResult(info, null)
-                    }
+                val info = when (name) {
+                    "GitHub" -> parseGitHub(body, name)
+                    "jsDelivr" -> parseJsDelivr(body, name)
+                    else -> null
+                } ?: continue
+                if (best == null || isVersionHigher(info.versionName, best.versionName)) {
+                    best = info
                 }
             } catch (_: Exception) {
-                // 换下一个源
+                lastError = "无法连接更新源（GitHub / jsDelivr 均不可达）"
             }
         }
-        CheckResult(null, "无法连接更新源（GitHub / jsDelivr 均不可达）")
+        val picked = best ?: return@withContext CheckResult(null, lastError ?: "无法连接更新源")
+        CheckResult(picked, null)
+    }
+
+    private fun parseGitHub(body: String, name: String): UpdateInfo? {
+        val json = JSONObject(body)
+        // release 的 assets 里找 .apk
+        val assets = json.optJSONArray("assets") ?: return null
+        var apkUrl: String? = null
+        for (i in 0 until assets.length()) {
+            val a = assets.optJSONObject(i) ?: continue
+            if (a.optString("name").endsWith(".apk", true)) {
+                apkUrl = a.optString("browser_download_url").ifEmpty { null }
+                break
+            }
+        }
+        val tag = stripV(json.optString("tag_name"))
+        if (tag.isEmpty()) return null
+        return UpdateInfo(
+            versionName = tag,
+            versionCode = -1, // GitHub 源拿不到 versionCode，用 versionName 比较
+            apkUrl = apkUrl ?: json.optString("html_url"),
+            releaseUrl = json.optString("html_url").ifEmpty {
+                "https://github.com/$REPO/releases"
+            },
+            source = name,
+        )
+    }
+
+    private fun parseJsDelivr(body: String, name: String): UpdateInfo? {
+        val json = JSONObject(body)
+        val vn = json.optString("versionName")
+        if (vn.isEmpty()) return null
+        return UpdateInfo(
+            versionName = vn,
+            versionCode = json.optInt("versionCode", -1),
+            apkUrl = json.optString("releaseUrl").ifEmpty { json.optString("releaseUrl") },
+            releaseUrl = json.optString("releaseUrl").ifEmpty {
+                "https://github.com/$REPO/releases"
+            },
+            source = name,
+        )
+    }
+
+    /** 比较两个版本号字符串，a 是否高于 b */
+    private fun isVersionHigher(a: String, b: String): Boolean {
+        val pa = a.split(".").mapNotNull { it.toIntOrNull() }
+        val pb = b.split(".").mapNotNull { it.toIntOrNull() }
+        val n = maxOf(pa.size, pb.size)
+        for (i in 0 until n) {
+            val x = pa.getOrElse(i) { 0 }
+            val y = pb.getOrElse(i) { 0 }
+            if (x != y) return x > y
+        }
+        return false
     }
 
     /**

@@ -34,7 +34,14 @@ object AppUpdateFlow {
         val current = BuildConfig.VERSION_NAME
         scope.launch {
             val result = AppUpdater.check()
-            val info = result.info ?: return@launch
+            val info = result.info
+            if (info == null) {
+                // 检测失败（网络不可达等）：给出提示，避免与「无更新」混淆
+                if (result.error != null) {
+                    toast(context, context.getString(R.string.app_update_check_fail, result.error))
+                }
+                return@launch
+            }
             if (!AppUpdater.isNewer(info.versionName, current)) return@launch
             prompt(context, info)
         }
