@@ -22,6 +22,14 @@ object Changelog {
 
     private val entries = listOf(
         Entry(
+            versionCode = 44,
+            versionName = "v0.5.29",
+            notes = listOf(
+                "App 自更新检测优化：jsDelivr 优先、多源取最高版本（抗缓存滞后）、检测失败给出可见提示",
+                "启动公告加入当前版本动态兜底，杜绝公告停留在旧版本",
+            ),
+        ),
+        Entry(
             versionCode = 43,
             versionName = "v0.5.28",
             notes = listOf(
